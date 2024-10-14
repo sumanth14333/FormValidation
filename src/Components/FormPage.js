@@ -16,7 +16,7 @@ function FormPage() {
         setFormdata({...formdata, [e.target.name]: e.target.value})
     }
 
-    const [errors, setErrors] = useState();
+    const [errors, setErrors] = useState(false);
 
 
     const validationSchema = yup.object({
@@ -41,6 +41,7 @@ function FormPage() {
             
         } catch (error) {
           const newError = {}
+          
 
           error.inner.forEach((err) => {
             newError[err.path] = err.message;
@@ -48,6 +49,7 @@ function FormPage() {
 
 
           setErrors(newError)
+          // alert("Enter Properly",newError)
         }        
       }
 
@@ -70,7 +72,7 @@ function FormPage() {
                 value={formdata.firstname}
                 onChange={changeHandler}
                 />
-                {/* {errors.firstname && <div className='error'>{errors.firstname}</div>} */}
+                {errors.firstname && <div className='error'>{errors.firstname}</div>}
         </div>
         <div className='form-group'>
             <label>LastName:</label>
@@ -81,7 +83,7 @@ function FormPage() {
                 value={formdata.lastname}
                 onChange={changeHandler}
             />
-            {/* {errors.lastname && <div className='error'>{errors.lastname}</div>} */}
+            {errors.lastname && <div className='error'>{errors.lastname}</div>}
         </div>
         <div className='form-group'>
             <label>Mail-ID:</label>
@@ -92,7 +94,7 @@ function FormPage() {
                 value={formdata.email}
                 onChange={changeHandler}
                 />
-                {/* {errors.email && <div className='error'>{errors.email}</div>} */}
+                {errors.email && <div className='error'>{errors.email}</div>}
         </div>
         <div className='form-group'>
             <label>Highest Qualification:</label>
@@ -103,7 +105,7 @@ function FormPage() {
                 value={formdata.qualification}
                 onChange={changeHandler}
                 />
-                {/* {errors.qualification && <div className='error'>{errors.qualification}</div>} */}
+                {errors.qualification && <div className='error'>{errors.qualification}</div>}
         </div>
         <div style={{display:'flex', width:'auto', justifyContent:'space-around', marginTop:'10px' }}>
           <button className='btn'>Submit</button>
